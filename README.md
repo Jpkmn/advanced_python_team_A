@@ -11,7 +11,18 @@ We need to use the following concepts:
   - Do not import modules in the beginning but only when necessary
   - Use sets and unions to check for overlapping values
   - Use test_insert (check this one)
-  - Use multiple assignment for variables
+  - Use multiple assignment for variables instead of line-by-line (x, y, z = "Orange", "Banana", "Cherry")
   - Concatenate strings using join()
   - Build infinite loop using while 1
-  - 
+  - In functions, use "raise exception" to leave them early
+  - Make use of itertools and more-itertools (https://docs.python.org/3/library/itertools.html, https://more-itertools.readthedocs.io/en/latest/index.html)
+  - Make use of keys to sort items
+  - Avoid using global variables
+  - Avoid function call overheads
+  - Use built-in libraries for data analysis and manipulation (NumPy, Pandas, Matplotlib, ...)
+  - Release memory
+  - Use garbage collector as a memory management technique
+
+Deliverables:
+- Code
+- Code must include explanations on why we used what (esp. for performance improvement code)
