@@ -1,6 +1,7 @@
 # advanced_python_team_A
 
 For our first assginement, we are trying to build an inventory system for an ecommerce provider.
+
 We need to use the following concepts:
 - Classes
   - Inheritance
@@ -25,4 +26,4 @@ We need to use the following concepts:
 
 Deliverables:
 - Code
-- Code must include explanations on why we used what (esp. for performance improvement code)
+- Code must include explanations on what we did and why we used what (esp. for performance improvement code)
