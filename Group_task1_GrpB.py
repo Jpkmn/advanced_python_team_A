@@ -253,6 +253,13 @@ class Store:
         else:
             print("No customers registered.")
             
+    def check_category_overlap(self):
+        # Example to check overlapping categories using set operations
+        electronic_ids = {prod._product_id for prod in self.products.values() if prod.category == 'Electronics'}
+        kitchen_ids = {prod._product_id for prod in self.products.values() if prod.category == 'Kitchen'}
+        overlap = electronic_ids.intersection(kitchen_ids)
+        print("Overlap in product IDs between Electronics and Kitchen:", overlap)
+            
 
 # Initialize store and add products/customers as usual
 store = Store()
@@ -286,4 +293,5 @@ store.emulate_random_orders(50)
 print("\nListing Orders:")
 store.list_orders()
 
-#gc.collect()
+store.check_category_overlap() 
+gc.collect()
