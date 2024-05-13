@@ -26,6 +26,7 @@ We need to use the following concepts:
   - Release memory (done)
   - Use garbage collector as a memory management technique
   - Data Format: save in memory-efficient ways (Parquet, Pickle, Feather instead of csv)
+  - Optional: Memory_profiler to see how much memory which each line of code needs
 
 Deliverables:
 - Code
