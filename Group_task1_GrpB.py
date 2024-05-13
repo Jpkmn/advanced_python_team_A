@@ -4,8 +4,6 @@ import pandas as pd
 import pyarrow.feather as feather
 import random
 
-#Test
-
 class Product:
     __slots__ = ['_product_id', 'name', 'category', 'price', '_stock', '_sales']
 
