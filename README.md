@@ -25,6 +25,7 @@ We need to use the following concepts:
   - Use built-in libraries for data analysis and manipulation (NumPy, Pandas, Matplotlib, ...)
   - Release memory (done)
   - Use garbage collector as a memory management technique
+  - Data Format: save in memory-efficient ways (Parquet, Pickle, Feather instead of csv)
 
 Deliverables:
 - Code
