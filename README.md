@@ -5,6 +5,8 @@ For our first assginement, we are trying to build an inventory system for an eco
 We need to use the following concepts:
 - Classes
   - Inheritance
+  - Other points see notebook
+
 - Performance improvement
   - Define slotted class (done)
   - List comprehension to create a new list based on the values of an existing list
