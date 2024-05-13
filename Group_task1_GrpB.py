@@ -8,11 +8,7 @@ class Product:
     __slots__ = ['_product_id', 'name', 'category', 'price', '_stock', '_sales']
 
     def __init__(self, product_id, name, category, price, stock):
-        self._product_id = product_id
-        self.name = name
-        self.category = category
-        self.price = price
-        self._stock = stock
+        self._product_id, self.name, self.category, self.price, self._stock = product_id, name, category, price, stock
         self._sales = 0
 
     def is_in_stock(self, quantity):
@@ -160,9 +156,7 @@ class Order:
 
 class Store:
     def __init__(self):
-        self.products = {}
-        self.customers = {}
-        self.orders = defaultdict(list)
+        self.products, self.customers, self.orders = {}, {}, defaultdict(list)
         self.next_order_id = 1
 
     def add_product(self, product):
@@ -179,45 +173,39 @@ class Store:
         else:
             print(f"Customer '{name}' is already registered.")
 
-    def save_customers(self, filepath='customers.feather'):
-        """Save all customers to a Feather file for persistent storage."""
+    def save_and_load_customers(self, filepath='customers.feather'):
+        """Save and then load customers to/from a Feather file for persistent storage."""
         data = pd.DataFrame([c.to_dict() for c in self.customers.values()])
         feather.write_feather(data, filepath)
-        print(f"Customers saved to {filepath}")
+        loaded_data = pd.read_feather(filepath)
+        for _, row in loaded_data.iterrows():
+            self.customers[row['customer_id']] = Customer.from_dict(row)
 
-    def load_customers(self, filepath='customers.feather'):
-        """Load customers from a Feather file, repopulating the customer list."""
-        try:
-            data = pd.read_feather(filepath)
-            for _, row in data.iterrows():
-                self.customers[row['customer_id']] = Customer.from_dict(row)
-            print(f"Customers loaded from {filepath}")
-        except FileNotFoundError:
-            print(f"File '{filepath}' not found.")
-
-    def save_products(self, filepath='products.feather'):
-        """Save all products to a Feather file for persistent storage."""
+    def save_and_load_products(self, filepath='products.feather'):
+        """Save and then load products to/from a Feather file for persistent storage."""
         data = pd.DataFrame([p.to_dict() for p in self.products.values()])
         feather.write_feather(data, filepath)
-        print(f"Products saved to {filepath}")
+        loaded_data = pd.read_feather(filepath)
+        for _, row in loaded_data.iterrows():
+            category = row['category']
+            if category == 'Electronics':
+                product = Electronics.from_dict(row)
+            else:
+                product = Product.from_dict(row)
+            self.products[row['product_id']] = product
 
-    def load_products(self, filepath='products.feather'):
-        """Load products from a Feather file and repopulate the store's inventory."""
-        try:
-            data = pd.read_feather(filepath)
-            for _, row in data.iterrows():
-                category = row['category']
-                if category == 'Electronics':
-                    product = Electronics.from_dict(row)
-                elif category == 'Kitchen':
-                    product = Kitchen.from_dict(row)
-                else:
-                    product = Product.from_dict(row)
-                self.products[row['product_id']] = product
-            print(f"Products loaded from {filepath}")
-        except FileNotFoundError:
-            print(f"File '{filepath}' not found.")
+    def emulate_random_orders(self, num_orders):
+            for _ in range(num_orders):
+                customer_id = random.choice(list(self.customers.keys()))
+                order_quantities = {}
+                for product_id in self.products.keys():
+                    if random.random() > 0.3:  # 70% chance of including this product in the order
+                        quantity = random.randint(1, 3)
+                        order_quantities[product_id] = quantity
 
+                if order_quantities:
+                    self.place_order(customer_id, order_quantities)
+                
     def place_order(self, customer_id, product_quantities):
         """Place an order for a given customer and their desired product quantities."""
         if customer_id not in self.customers:
@@ -264,18 +252,6 @@ class Store:
                 print(f"Customer {customer.customer_id}: {customer.name}, Orders: {customer.list_orders()}")
         else:
             print("No customers registered.")
-
-def emulate_random_orders(store, num_orders):
-    for _ in range(num_orders):
-        customer_id = random.choice(list(store.customers.keys()))
-        order_quantities = {}
-        for product_id in store.products.keys():
-            if random.random() > 0.3:  # 70% chance of including this product in the order
-                quantity = random.randint(1, 50)
-                order_quantities[product_id] = quantity
-        
-        if order_quantities:
-            store.place_order(customer_id, order_quantities)
             
 
 # Initialize store and add products/customers as usual
@@ -293,13 +269,9 @@ store.add_product(Kitchen(202, "Toaster", 49.99, 50, "A+"))
 store.add_customer(1, "Alice")
 store.add_customer(2, "Bob")
 
-# Save and load customers to/from a Feather file
-store.save_customers()
-store.load_customers()
-
-# Save and load products to/from a Feather file
-store.save_products()
-store.load_products()
+# Save and load customers AND products to/from a Feather file
+store.save_and_load_customers()
+store.save_and_load_products()
 
 # List loaded products and customers to confirm persistence
 print("\nLoaded Products:")
@@ -310,8 +282,8 @@ store.list_customers()
 
 # Emulate random orders
 print("\nEmulating Random Orders:")
-emulate_random_orders(store, num_orders=5)
-
-# List all orders
+store.emulate_random_orders(50)
 print("\nListing Orders:")
 store.list_orders()
+
+#gc.collect()
