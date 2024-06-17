@@ -8,7 +8,7 @@ import joblib
 def show_page():
     st.title("Feature Importance")
 
-    st.header("Importance of Features in the Decision Tree Model")
+    st.header("Importance of Features in the XGBoost Model")
 
     st.write("The feature importance values represent the relative importance of each feature in predicting "
              "customer satisfaction. It helps understand which features have the most impact on the model's predictions. "
