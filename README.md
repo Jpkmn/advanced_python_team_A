@@ -27,7 +27,7 @@ The repository is structured as follows:
 - Folder `Final Project`: Contains the main files and folders of the project. Inside this folder, the following structure can be found: 
   - Folder `data`: Contains the dataset initially downloaded from Kaggle (airline_customer_satisfaction_original.csv) and the dataset used for training the model (Airline_customer_satisfaction.csv).
   - `Model Airline Satisfaction.ipynb`: The Jupyter notebook containing the data exploration, the training of six different model, and evaluation process.
-  - `Advance Programming in Python_Final Presentation.pdf`: The final presentation of the project.
+  - `Final Presentation.pdf`: The final presentation of the project.
   - Folder `Dashboard`: Contains the main files and folders of the dashboard application.
     - Folder `data`: Contains the cleaned dataset for the dashboard (airline_customer_satisfaction.csv).
     - `pages`: Contains the model (XGBoost) and main pages of the application, including the home page, the detailed analysis page, the prediction pages, and feature importance page.
