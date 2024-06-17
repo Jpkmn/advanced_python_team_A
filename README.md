@@ -34,6 +34,6 @@ The repository is structured as follows:
     - `app.py`: The main file to run the application.
     - `sample_airline_customer_satisfaction.xlsx`: Prepared dataset for uploading batch data to the application.
 
-## Explanation of the files
+## Explanation of the files and dashboard execution
 - Please explore the file `Model Airline Satisfaction.ipynb` to understand the data exploration, the training of six different models, and the evaluation process.
-- To run the dashboard, navigate to the folder `Dashboard` and execute the file `app.py` in your console with the command `streamlit run app.py`. Please make sure that all necessary libraries are installed before running the dashboard.
+- To run the dashboard, navigate to the folder `Dashboard` (in your terminal: `cd Final Project/Dashboard`) and execute the file `app.py` in your console with the command `streamlit run app.py`. Please make sure that all necessary libraries are installed before running the dashboard.
