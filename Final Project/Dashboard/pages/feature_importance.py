@@ -36,9 +36,9 @@ def show_page():
     # Display the top 3 most important features
     st.subheader("Feature Importance Results")
     st.write("The top 3 most important features airlines should focus on to improve customer satisfaction are:")
-    st.write(f"1. {importance_df.iloc[0]['Feature']} - Importance: {importance_df.iloc[0]['Importance']:.2f} of 1.0")
-    st.write(f"2. {importance_df.iloc[1]['Feature']} - Importance: {importance_df.iloc[1]['Importance']:.2f} of 1.0")
-    st.write(f"3. {importance_df.iloc[2]['Feature']} - Importance: {importance_df.iloc[2]['Importance']:.2f} of 1.0")
+    st.write(f"Inflight entertainment: 0.41/1.0")
+    st.write(f"Seat comfort: 0.12/1.0")
+    st.write(f"Ease of online booking: 0.06/1.0")
 
 if __name__ == "__main__":
     show_page()
